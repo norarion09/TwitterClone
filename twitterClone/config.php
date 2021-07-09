@@ -9,4 +9,4 @@ define('HOME_URL', '/TwitterClone/');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
-define('DB_NAME', 'twitter_clone2');
+define('DB_NAME', 'twitter_clone');

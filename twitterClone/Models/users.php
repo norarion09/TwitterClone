@@ -11,7 +11,7 @@
 function createUser(array $data){
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 //接続チェック
-if ($mysqli->connect_error) {
+if ($mysqli->connect_errno) {
     echo 'MySQLの接続に失敗しました。:' . $mysqli->connect_error . "\n";
     exit;
 }
