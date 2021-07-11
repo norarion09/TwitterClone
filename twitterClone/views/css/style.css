@@ -66,6 +66,10 @@ color: #1af;
     text-decoration: none;
 }
 
+.text-sm{
+    font-size: 0.7rem;
+}
+
 .side .side-inner {
     top: 0px;
     padding-top: 20px;
