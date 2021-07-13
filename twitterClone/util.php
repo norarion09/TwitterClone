@@ -113,3 +113,39 @@ $user['image_path'] = buildImagePath($user['image_name'], 'user');
 
 return $user;
 }
+
+/**
+ * 画像をアップロード
+ * 
+ * @param array $user
+ * @param array $file
+ * @param string $type
+ * @return string 画像のファイル名
+ */
+
+function uploadImage(array $user, array $file, string $type)
+{
+//画像のファイル名から拡張子を取得(例：.png)
+$image_extension = strrchr($file['name'], '.');
+
+//画像のファイル名を作成(YmdHis 例: 2021-01-01 00:00:00)
+$image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
+
+//保存先のディレクトリ
+$directory = '../views/img_upload/' . $type . '/';
+
+//画像のパス
+$image_path = $directory . $image_name;
+
+//画像を設置
+move_uploaded_file($file['tmp_name'], $image_path);
+
+//画像ファイルかチェック
+if(exif_imagetype($image_path)){
+  return $image_name;
+}
+
+//画像ファイル以外
+echo '選択されたファイルが画像ではないため処理を停止しました。';
+exit;
+}
