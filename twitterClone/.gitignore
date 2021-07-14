@@ -1,0 +1,5 @@
+.DS_Store
+
+#ダンプファイル
+/twitter_clone_backup.sql
+/twitter_clone_testdata_utu6au.sql
