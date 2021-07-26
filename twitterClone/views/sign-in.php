@@ -12,7 +12,7 @@
 <body class="signup text-center">
     <main class="form-signup">
         <form action="sign-in.php" method="post">
-            <img src="/twitterClone/views/img/logo-white.svg" alt="" class="logo-white">
+            <img src="/TwitterClone/views/img/logo-white.svg" alt="" class="logo-white">
             <h1>Twitterクローンにログイン</h1>
 
             <?php if(isset($view_try_login_result) && $view_try_login_result === false):?>

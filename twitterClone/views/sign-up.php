@@ -18,7 +18,7 @@ include_once('../util.php');
 <body class="signup text-center">
     <main class="form-signup">
         <form action="sign-up.php" method="post">
-            <img src="/twitterClone/views/img/logo-white.svg" alt="" class="logo-white">
+            <img src="/TwitterClone/views/img/logo-white.svg" alt="" class="logo-white">
             <h1>アカウントを作る</h1>
             <input type="text" class="form-control" name="nickname" placeholder="ニックネーム" maxlength="50" required autofocus>
             <input type="text" class="form-control" name="name" placeholder="ユーザー名、例)tako888" maxlength="50" required>
