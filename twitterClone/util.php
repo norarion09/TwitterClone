@@ -61,7 +61,7 @@ function convertToDayTimeAgo(string $datetime)
 function saveUserSession(array $user)
 {
   //セッションを開始していない場合
-  if(session_status() === PHP_SESSION_NONE) {
+  if (session_status() === PHP_SESSION_NONE) {
     //セッション開始
     session_start();
   }
@@ -77,11 +77,11 @@ function saveUserSession(array $user)
 function deleteUserSession()
 {
   //セッションを開始していない場合
-  if(session_status() === PHP_SESSION_NONE) {
+  if (session_status() === PHP_SESSION_NONE) {
     //セッション開始
     session_start();
   }
-      //セッションのユーザー情報を削除
+  //セッションのユーザー情報を削除
   unset($_SESSION['USER']);
 }
 
@@ -92,26 +92,26 @@ function deleteUserSession()
  */
 function getUserSession()
 {
- //セッションを開始していない場合
- if(session_status() === PHP_SESSION_NONE) {
-  //セッション開始
-  session_start();
-}
+  //セッションを開始していない場合
+  if (session_status() === PHP_SESSION_NONE) {
+    //セッション開始
+    session_start();
+  }
 
-if(!isset($_SESSION['USER'])){
-  //セッションにユーザー情報がない
-  return false;
-}
+  if (!isset($_SESSION['USER'])) {
+    //セッションにユーザー情報がない
+    return false;
+  }
 
-$user = $_SESSION['USER'];
+  $user = $_SESSION['USER'];
 
-//画像のファイル名からファイルのURLを取得
-if (!isset($user['image_name'])) {
-  $user['image_name'] = null;
-}
-$user['image_path'] = buildImagePath($user['image_name'], 'user');
+  //画像のファイル名からファイルのURLを取得
+  if (!isset($user['image_name'])) {
+    $user['image_name'] = null;
+  }
+  $user['image_path'] = buildImagePath($user['image_name'], 'user');
 
-return $user;
+  return $user;
 }
 
 /**
@@ -125,27 +125,27 @@ return $user;
 
 function uploadImage(array $user, array $file, string $type)
 {
-//画像のファイル名から拡張子を取得(例：.png)
-$image_extension = strrchr($file['name'], '.');
+  //画像のファイル名から拡張子を取得(例：.png)
+  $image_extension = strrchr($file['name'], '.');
 
-//画像のファイル名を作成(YmdHis 例: 2021-01-01 00:00:00)
-$image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
+  //画像のファイル名を作成(YmdHis 例: 2021-01-01 00:00:00)
+  $image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
 
-//保存先のディレクトリ
-$directory = '../views/img_upload/' . $type . '/';
+  //保存先のディレクトリ
+  $directory = '../views/img_uploaded/' . $type . '/';
 
-//画像のパス
-$image_path = $directory . $image_name;
+  //画像のパス
+  $image_path = $directory . $image_name;
 
-//画像を設置
-move_uploaded_file($file['tmp_name'], $image_path);
+  //画像を設置
+  move_uploaded_file($file['tmp_name'], $image_path);
 
-//画像ファイルかチェック
-if(exif_imagetype($image_path)){
-  return $image_name;
-}
+  //画像ファイルかチェック
+  if (exif_imagetype($image_path)) {
+    return $image_name;
+  }
 
-//画像ファイル以外
-echo '選択されたファイルが画像ではないため処理を停止しました。';
-exit;
+  //画像ファイル以外
+  echo '選択されたファイルが画像ではないため処理を停止しました。';
+  exit;
 }
