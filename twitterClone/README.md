@@ -1,2 +1,2 @@
 # TwitterClone
-テスto
+テスt
