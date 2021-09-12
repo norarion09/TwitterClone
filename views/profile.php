@@ -1,24 +1,4 @@
-<?php
-// 設定関連読み込み
-include_once('../config.php');
-// 便利な関数読み込み
-include_once('../util.php');
 
-
-$view_tweets = [
-  [
-    'user_id' => 1,
-    'user_name' => 'taro',
-    'user_nickname' => '太郎',
-    'user_image_name' => 'sample-person.jpg',
-    'tweet_body' => '今プログラミングをしています。',
-    'tweet_image_name' => null,
-    'tweet_created_at' => '2021-03-15 14:00:00',
-    'like_id' => null,
-    'like_count' => 0,
-  ],
-];
-  ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,15 +16,15 @@ $view_tweets = [
 
         <div class="main">
             <div class="main-header">
-                <h1>太郎</h1>
+                <h1><?php echo $view_requested_user['nickname']; ?></h1>
             </div>
             <div class="profile-area">
                 <div class="top">
-                    <div class="user"><img src="/TwitterClone/views/img_uploaded/user/sample-person.jpg" alt=""></div>
+                    <div class="user"><img src="<?php echo buildImagePath($view_requested_user['image_name'], 'user'); ?>" alt=""></div>
 
-                    <?php if(isset($_GET['user_id'])):?>
+                    <?php if ($view_user['id'] !== $view_requested_user['id']) : ?>
                         <!-- 他人のプロフィール -->
-                        <?php if(isset($_GET['case'])):?>
+                        <?php if(isset($view_requested_user['follow_id'])) : ?>
                         <button class="btn btn-sm">フォローを外す</button>
                         <?php else :?>
                         <button class="btn btn-sm btn-reverse">フォローする</button>
@@ -63,16 +43,16 @@ $view_tweets = [
                                     </div>
                                     <div class="modal-body">
                                         <div class="user">
-                                            <img src="/TwitterClone/views/img_uploaded/user/sample-person.jpg" alt="">
+                                            <img src="<?php echo buildImagePath($view_user['image_name'], 'user'); ?>" alt="">
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1">プロフィール写真</label>
                                             <input type="file" class="form-control form-control-sm" name="image">
                                         </div>
 
-                                        <input type="text" class="mb-4 form-control" name="nickname" maxlength="50" value="太郎" placeholder="ニックネーム" required>
-                                        <input type="text" class="mb-4 form-control" name="name" maxlength="50" value="taro" placeholder="ユーザー名" required>
-                                        <input type="email" class="mb-4 form-control" name="email" maxlength="254" value="taro@techis.jp" placeholder="メールアドレス" required>
+                                        <input type="text" class="mb-4 form-control" name="nickname" maxlength="50" value="<?php echo htmlspecialchars($view_user['nickname']); ?>" placeholder="ニックネーム" required>
+                                        <input type="text" class="mb-4 form-control" name="name" maxlength="50" value="<?php echo htmlspecialchars($view_user['name']); ?>" placeholder="ユーザー名" required>
+                                        <input type="email" class="mb-4 form-control" name="email" maxlength="254" value="<?php echo htmlspecialchars($view_user['email']); ?>" placeholder="メールアドレス" required>
                                         <input type="password" class="mb-4 form-control" name="password" minlength="4" maxlength="128" value="" placeholder="パスワード変更する場合ご入力ください">
                                     </div>
                                     <div class="modal-footer">
@@ -86,13 +66,13 @@ $view_tweets = [
                     <?php endif; ?>
                 </div>
 
-                <div class="name">太郎</div>
-                <div class="text-muted">@taro</div>
+                <div class="name"><?php echo htmlspecialchars($view_requested_user['nickname']); ?></div>
+                <div class="text-muted">@<?php echo htmlspecialchars($view_requested_user['name']); ?></div>
 
                 <div class="follow-follower">
-                    <div class="follow-count">1</div>
+                    <div class="follow-count"><?php echo htmlspecialchars($view_requested_user['follow_user_count']); ?></div>
                     <div class="follow-text">フォロー中</div>
-                    <div class="follow-count">1</div>
+                    <div class="follow-count"><?php echo htmlspecialchars($view_requested_user['followed_user_count']); ?></div>
                     <div class="follow-text">フォロワー</div>
                 </div>
             </div>
