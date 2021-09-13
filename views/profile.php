@@ -25,9 +25,9 @@
                     <?php if ($view_user['id'] !== $view_requested_user['id']) : ?>
                         <!-- 他人のプロフィール -->
                         <?php if(isset($view_requested_user['follow_id'])) : ?>
-                        <button class="btn btn-sm">フォローを外す</button>
+                        <button class="btn btn-sm js-follow" data-followed-user-id="<?php echo $view_requested_user['id']; ?>" data-follow-id="<?php echo $view_requested_user['follow_id']; ?>">フォローを外す</button>
                         <?php else :?>
-                        <button class="btn btn-sm btn-reverse">フォローする</button>
+                        <button class="btn btn-sm btn-reverse js-follow" data-followed-user-id="<?php echo $view_requested_user['id']; ?>">フォローする</button>
                         <?php endif; ?>
                         <?php else :?>
                              <!-- 自分のプロフィール -->
