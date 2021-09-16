@@ -67,14 +67,14 @@ DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(20) NOT NULL DEFAULT 'active',
-  `recieved_user_id` int(11) NOT NULL,
+  `received_user_id` int(11) NOT NULL,
   `sent_user_id` int(11) NOT NULL,
   `message` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
-  KEY `recieved_user_id` (`recieved_user_id`),
+  KEY `received_user_id` (`received_user_id`),
   KEY `sent_user_id` (`sent_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;

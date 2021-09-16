@@ -1,12 +1,4 @@
-<?php
-// 設定関連読み込み
-include_once('../config.php');
-// 便利な関数読み込み
-include_once('../util.php');
 
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -29,26 +21,20 @@ include_once('../util.php');
             <div class="ditch"></div>
 
             <div class="notification-list">
-                <?php if (isset($_GET['case'])) : ?>
+                <?php if (empty($view_notifications)) : ?>
                     <p class="no-result">通知はまだありません。</p>
                 <?php else : ?>
+                    <?php foreach ($view_notifications as $view_notification):?>
                     <div class="notification-item">
                         <div class="user">
-                            <img src="<?php echo HOME_URL; ?>views/img_uploaded/user/sample-person.jpg" alt="">
+                            <img src="<?php echo buildImagePath($view_notification['user_image_name'], 'user'); ?>" alt="">
                         </div>
                         <div class="content">
-                            <p>いいねされました。</p>
+                            <p><?php echo htmlspecialchars($view_notification['notification_message']); ?> </p>
                         </div>
                     </div>
 
-                    <div class="notification-item">
-                        <div class="user">
-                            <img src="<?php echo HOME_URL; ?>views/img_uploaded/user/sample-person.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <p>フォローされました。</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </div>
 
